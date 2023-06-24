@@ -1,7 +1,6 @@
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import {
   getPokemonList,
-  getPokemonDetail,
   TPokemonListResponse,
   TPokemonListDetailResponse,
 } from "@/services/pokemonService";
@@ -9,15 +8,14 @@ import PokemonCard from "@/components/pages/home/PokemonCard";
 import PokemonCardSkeleton from "@/components/pages/home/PokemonCard/Skeleton";
 import Search from "@/components/pages/home/Search";
 import useInView from "@/hooks/useInView";
+import SearchResult from "@/components/pages/home/SearchResult";
 
 export default function Home() {
   const { ref, inView } = useInView({ threshold: 1 });
   const [isFetchingNextPage, setIsFetchingNextPage] = useState<boolean>(false);
   const [currPage, setcurrPage] = useState<number>(1);
   const [pokemonList, setPokemonList] = useState<TPokemonListResponse[]>();
-  const [pokemonSearched, setPokemonSearched] = useState<
-    TPokemonListDetailResponse | "Not Found"
-  >();
+  const [searchQuery, setSearchQuery] = useState<string>("");
   const [pokemonListDetail, setPokemonListDetail] =
     useState<TPokemonListDetailResponse[]>();
   const [isSearching, setIsSearching] = useState<boolean>(false);
@@ -43,11 +41,8 @@ export default function Home() {
 
   const handleSearchPokemon = async (value: string) => {
     if (value.trim() !== "") {
+      setSearchQuery(value);
       setIsSearching(true);
-      setPokemonSearched(undefined);
-
-      const data = await getPokemonDetail(value);
-      setPokemonSearched(data);
     } else if (value.trim() === "") {
       await setIsSearching(false);
     }
@@ -114,17 +109,9 @@ export default function Home() {
             ))}
           </>
         ) : (
-          <>
-            {!pokemonSearched || pokemonSearched == "Not Found" ? (
-              <p className="text-white">Not found...</p>
-            ) : (
-              <PokemonCard
-                id={pokemonSearched.id}
-                name={pokemonSearched.name}
-                imgUrl={pokemonSearched.sprites.front_default}
-              />
-            )}
-          </>
+          <Suspense fallback={<PokemonCardSkeleton />}>
+            <SearchResult query={searchQuery} />
+          </Suspense>
         )}
       </div>
 

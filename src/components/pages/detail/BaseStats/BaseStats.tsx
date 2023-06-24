@@ -8,6 +8,9 @@ const BaseStats = () => {
   const { query } = useRouter();
   const pokemonDetail = useRecoilValue(pokemonDataState(query.id as string));
 
+  if (!pokemonDetail)
+    return <p className="text-white">Cannot found base stats</p>;
+
   const totalStats = pokemonDetail.stats.reduce(
     (prevValue, currValue) => prevValue + currValue.base_stat,
     0

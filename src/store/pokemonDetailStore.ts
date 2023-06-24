@@ -5,17 +5,23 @@ import {
   TPokemonMovesResponse,
   TPokemonSpeciesResponse,
 } from "@/types/pokemon";
-import {  selectorFamily } from "recoil";
+import { selectorFamily } from "recoil";
 
 const BASE_URL = process.env.BASE_URL;
 
 export const pokemonDataState = selectorFamily({
   key: "pokemonData",
-  get: (name: string) => async (): Promise<TPokemonListDetailResponse> => {
-    const response = await fetch(`${BASE_URL}/pokemon/${name}`).then((resp) =>
-      resp.json()
-    );
-    return response;
+  get: (name: string) => async (): Promise<TPokemonListDetailResponse | null> => {
+    try {
+      const response = await fetch(`${BASE_URL}/pokemon/${name}`).then((resp) =>
+        resp.json()
+      );
+      if (!response.ok && response.status === 404) throw new Error("Not found");
+
+      return response;
+    } catch (error) {
+      return null
+    }
   },
 });
 
@@ -59,8 +65,10 @@ export const pokemonMoveState = selectorFamily({
   key: "pokemonMove",
   get:
     (name: string) =>
-    async ({ get }): Promise<TPokemonMovesResponse[]> => {
+    async ({ get }): Promise<TPokemonMovesResponse[] | null> => {
       const pokemonDetail = get(pokemonDataState(name));
+      if(!pokemonDetail) return null
+
       const datas = Promise.all(
         pokemonDetail.moves.slice(0, 10).map(async (move) => {
           const data = await fetch(move.move.url).then((resp) => resp.json());

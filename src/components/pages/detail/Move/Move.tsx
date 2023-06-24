@@ -9,6 +9,9 @@ const Move = () => {
   const { query } = useRouter();
   const pokemonMoves = useRecoilValue(pokemonMoveState(query.id as string));
 
+  if (!pokemonMoves)
+    return <p className="text-white">Cannot found pokemon moves</p>;
+
   return (
     <Card title="Move">
       <table className="table-auto w-full border-separate border-spacing-2 border border-slate-400">

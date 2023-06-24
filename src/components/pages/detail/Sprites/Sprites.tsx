@@ -9,6 +9,9 @@ const Sprites = () => {
   const { query } = useRouter();
   const pokemonDetail = useRecoilValue(pokemonDataState(query.id as string));
 
+  if (!pokemonDetail)
+    return <p className="text-white">Cannot found pokemon sprites</p>;
+
   return (
     <Card title="Sprites">
       <div className="">
