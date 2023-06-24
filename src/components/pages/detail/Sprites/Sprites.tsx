@@ -2,19 +2,12 @@ import React from "react";
 import Card from "../Card";
 import Image from "next/image";
 import { useRouter } from "next/router";
-import useFetchApi from "@/hooks/useFetchApi";
-import { TPokemonListDetailResponse } from "@/types/pokemon";
+import { useRecoilValue } from "recoil";
+import { pokemonDataState } from "@/store/pokemonDetailStore";
 
-type Props = {};
-
-const Sprites = (props: Props) => {
-  const BASE_URL = process.env.BASE_URL;
+const Sprites = () => {
   const { query } = useRouter();
-  const { data: pokemonDetail } = useFetchApi<TPokemonListDetailResponse>(
-    `${BASE_URL}/pokemon/${query.id}`
-  );
-
-  if (!pokemonDetail) return <>Loading...</>;
+  const pokemonDetail = useRecoilValue(pokemonDataState(query.id as string));
 
   return (
     <Card title="Sprites">
