@@ -1,7 +1,7 @@
 import { reformatEvolutionChain } from "@/helpers/reformat";
-import { getPokemonDetail } from "@/services/pokemonService";
 import {
   TPokemonListDetailResponse,
+  TPokemonListResponse,
   TPokemonMovesResponse,
   TPokemonSpeciesResponse,
 } from "@/types/pokemon";
@@ -11,18 +11,20 @@ const BASE_URL = process.env.BASE_URL;
 
 export const pokemonDataState = selectorFamily({
   key: "pokemonData",
-  get: (name: string) => async (): Promise<TPokemonListDetailResponse | null> => {
-    try {
-      const response = await fetch(`${BASE_URL}/pokemon/${name}`).then((resp) =>
-        resp.json()
-      );
-      if (!response.ok && response.status === 404) throw new Error("Not found");
+  get:
+    (name: string) => async (): Promise<TPokemonListDetailResponse | null> => {
+      try {
+        const response = await fetch(`${BASE_URL}/pokemon/${name}`).then(
+          (resp) => resp.json()
+        );
+        if (!response.ok && response.status === 404)
+          throw new Error("Not found");
 
-      return response;
-    } catch (error) {
-      return null
-    }
-  },
+        return response;
+      } catch (error) {
+        return null;
+      }
+    },
 });
 
 export const pokemonSpeciesState = selectorFamily({
@@ -50,7 +52,9 @@ export const pokemonEvolutionChainState = selectorFamily({
 
       const getPokemonsEvolveChain = Promise.all(
         reformatDataEvolution.map(async (pokemon) => {
-          const response = await getPokemonDetail(pokemon.name);
+          const response: Promise<TPokemonListDetailResponse> = await fetch(
+            `${BASE_URL}/pokemon/${pokemon.name}`
+          ).then((resp)=>resp.json());
           return response;
         })
       );
@@ -67,7 +71,7 @@ export const pokemonMoveState = selectorFamily({
     (name: string) =>
     async ({ get }): Promise<TPokemonMovesResponse[] | null> => {
       const pokemonDetail = get(pokemonDataState(name));
-      if(!pokemonDetail) return null
+      if (!pokemonDetail) return null;
 
       const datas = Promise.all(
         pokemonDetail.moves.slice(0, 10).map(async (move) => {
@@ -79,5 +83,35 @@ export const pokemonMoveState = selectorFamily({
       const moves = await datas;
 
       return moves;
+    },
+});
+
+export const pokemonListState = selectorFamily({
+  key: "pokemonList",
+  get: (page: number) => async (): Promise<TPokemonListResponse> => {
+    const response = await fetch(
+      `${BASE_URL}/pokemon/?offset=${(page - 1) * 8}&limit=8`
+    );
+    const data = await response.json();
+
+    return data;
+  },
+});
+
+export const pokemonListDetailState = selectorFamily({
+  key: "pokemonListDetail",
+  get:
+    (page: number) =>
+    async ({ get }) => {
+      const pokemonList = get(pokemonListState(page));
+      const response = Promise.all(
+        pokemonList.results.map(async (pokemon) => {
+          const data = await fetch(pokemon.url).then((resp) => resp.json());
+          return data;
+        })
+      );
+
+      const datas = await response;
+      return datas;
     },
 });
