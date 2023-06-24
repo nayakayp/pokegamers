@@ -8,7 +8,7 @@ import {
 import PokemonCard from "@/components/pages/home/PokemonCard";
 import PokemonCardSkeleton from "@/components/pages/home/PokemonCard/Skeleton";
 import Search from "@/components/pages/home/Search";
-import { useInView } from "react-intersection-observer";
+import useInView from "@/hooks/useInView";
 
 export default function Home() {
   const { ref, inView } = useInView({ threshold: 1 });
@@ -129,8 +129,8 @@ export default function Home() {
         ></div>
       ) : (
         <div className="grid grid-cols-2 gap-4 justify-center">
-          {[...Array(8)].map((u, i) => (
-            <PokemonCardSkeleton />
+          {[...Array(8)].map((_, i) => (
+            <PokemonCardSkeleton key={i} />
           ))}
         </div>
       )}
