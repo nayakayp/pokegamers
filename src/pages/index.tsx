@@ -121,7 +121,7 @@ export default function Home() {
         )}
       </div>
 
-      {!isFetchingNextPage && !isSearching ? (
+      {!isFetchingNextPage ? (
         <div
           ref={ref}
           className="bg-transparent h-10 w-full"
