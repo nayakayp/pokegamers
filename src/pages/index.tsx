@@ -6,6 +6,7 @@ import {
   TPokemonListDetailResponse,
 } from "@/services/pokemonService";
 import PokemonCard from "@/components/pages/home/PokemonCard";
+import PokemonCardSkeleton from "@/components/pages/home/PokemonCard/Skeleton";
 import Search from "@/components/pages/home/Search";
 import { useInView } from "react-intersection-observer";
 
@@ -93,8 +94,7 @@ export default function Home() {
       <div className="mt-4">
         <Search onChange={(newValue) => handleSearchPokemon(newValue)} />
       </div>
-      {/* <input type="text" placeholder="Search..." /> */}
-      <div className="py-10 grid grid-cols-2 gap-4 justify-center">
+      <div className="pt-10 pb-4 grid grid-cols-2 gap-4 justify-center">
         {!isSearching ? (
           <>
             {pokemonListDetail.map((pokemon) => (
@@ -105,29 +105,6 @@ export default function Home() {
                 imgUrl={pokemon.sprites.front_default}
               />
             ))}
-            {!isFetchingNextPage ? (
-              <div
-                ref={ref}
-                className="bg-red-50 h-10 w-full"
-                onClick={handleNextPage}
-              >
-                Next page {inView.toString()}
-              </div>
-            ) : (
-              <div className="text-white">
-                <p>Skeleton</p>
-                <p>Skeleton</p>
-                <p>Skeleton</p>
-                <p>Skeleton</p>
-                <p>Skeleton</p>
-                <p>Skeleton</p>
-                <p>Skeleton</p>
-                <p>Skeleton</p>
-                <p>Skeleton</p>
-                <p>Skeleton</p>
-                <p>Skeleton</p>
-              </div>
-            )}
           </>
         ) : (
           <>
@@ -143,6 +120,20 @@ export default function Home() {
           </>
         )}
       </div>
+
+      {!isFetchingNextPage && !isSearching ? (
+        <div
+          ref={ref}
+          className="bg-transparent h-10 w-full"
+          onClick={handleNextPage}
+        ></div>
+      ) : (
+        <div className="grid grid-cols-2 gap-4 justify-center">
+          {[...Array(8)].map((u, i) => (
+            <PokemonCardSkeleton />
+          ))}
+        </div>
+      )}
     </main>
   );
 }
