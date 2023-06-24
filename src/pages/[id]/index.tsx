@@ -7,6 +7,7 @@ import Sprites from "@/components/pages/detail/Sprites";
 import Move from "@/components/pages/detail/Move/Move";
 import Evolutions from "@/components/pages/detail/Evolutions/Evolutions";
 import useFetchApi from "@/hooks/useFetchApi";
+import PageSkeleton from "@/components/pages/detail/Skeleton/PageSkeleton";
 
 const PokemonDetailPage = () => {
   const BASE_URL = process.env.BASE_URL;
@@ -16,7 +17,7 @@ const PokemonDetailPage = () => {
     `${BASE_URL}/pokemon/${query.id}`
   );
 
-  if (!pokemonDetail) return <p className="text-white">Loading...</p>;
+  if (!pokemonDetail) return <PageSkeleton />;
 
   return (
     <div className="text-white">
