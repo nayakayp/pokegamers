@@ -26,13 +26,15 @@ const Sprites = () => {
             alt={pokemonDetail.name}
             className="mx-auto"
           />
-          <Image
-            src={pokemonDetail.sprites.back_default}
-            width={96}
-            height={96}
-            alt={pokemonDetail.name}
-            className="mx-auto"
-          />
+          {pokemonDetail.sprites.back_default && (
+            <Image
+              src={pokemonDetail.sprites.back_default}
+              width={96}
+              height={96}
+              alt={pokemonDetail.name}
+              className="mx-auto"
+            />
+          )}
         </div>
       </div>
       <div className="">
@@ -40,20 +42,25 @@ const Sprites = () => {
           Shiny
         </h4>
         <div className="flex">
-          <Image
-            src={pokemonDetail.sprites.front_shiny}
-            width={96}
-            height={96}
-            alt={pokemonDetail.name}
-            className="mx-auto"
-          />
-          <Image
-            src={pokemonDetail.sprites.back_shiny}
-            width={96}
-            height={96}
-            alt={pokemonDetail.name}
-            className="mx-auto"
-          />
+          {pokemonDetail.sprites.front_shiny && (
+            <Image
+              src={pokemonDetail.sprites.front_shiny}
+              width={96}
+              height={96}
+              alt={pokemonDetail.name}
+              className="mx-auto"
+            />
+          )}
+
+          {pokemonDetail.sprites.back_shiny && (
+            <Image
+              src={pokemonDetail.sprites.back_shiny}
+              width={96}
+              height={96}
+              alt={pokemonDetail.name}
+              className="mx-auto"
+            />
+          )}
         </div>
       </div>
     </Card>
