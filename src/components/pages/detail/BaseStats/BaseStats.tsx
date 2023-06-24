@@ -1,19 +1,12 @@
 import React from "react";
 import Card from "../Card";
-import useFetchApi from "@/hooks/useFetchApi";
 import { useRouter } from "next/router";
-import { TPokemonListDetailResponse } from "@/types/pokemon";
+import { useRecoilValue } from "recoil";
+import { pokemonDataState } from "@/store/pokemonDetailStore";
 
-type Props = {};
-
-const BaseStats = (props: Props) => {
-  const BASE_URL = process.env.BASE_URL;
+const BaseStats = () => {
   const { query } = useRouter();
-  const { data: pokemonDetail } = useFetchApi<TPokemonListDetailResponse>(
-    `${BASE_URL}/pokemon/${query.id}`
-  );
-
-  if (!pokemonDetail) return <>Loading...</>;
+  const pokemonDetail = useRecoilValue(pokemonDataState(query.id as string));
 
   const totalStats = pokemonDetail.stats.reduce(
     (prevValue, currValue) => prevValue + currValue.base_stat,
@@ -26,7 +19,8 @@ const BaseStats = (props: Props) => {
         <tbody className="">
           {pokemonDetail.stats.map((stat) => (
             <tr key={stat.stat.name} className="px-6 py-4">
-              <td className="uppercase font-medium pr-4">{stat.stat.name}</td>:{" "}
+              <td className="uppercase font-medium pr-4">{stat.stat.name}</td>
+              <td>:</td>
               <td className="text-left pl-2">{stat.base_stat}</td>
             </tr>
           ))}

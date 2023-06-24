@@ -87,7 +87,14 @@ export default function Home() {
     }
   }, [inView]);
 
-  if (!pokemonListDetail) return <div className="text-white">Loading...</div>;
+  if (!pokemonListDetail)
+    return (
+      <div className="grid grid-cols-2 gap-4 justify-center">
+        {[...Array(8)].map((_, i) => (
+          <PokemonCardSkeleton key={i} />
+        ))}
+      </div>
+    );
 
   return (
     <main>

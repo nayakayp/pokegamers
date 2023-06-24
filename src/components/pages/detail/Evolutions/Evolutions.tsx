@@ -1,60 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Card from "../Card";
-import useFetchApi from "@/hooks/useFetchApi";
 import { useRouter } from "next/router";
-import {
-  TPokemonListDetailResponse,
-  TPokemonSpeciesResponse,
-} from "@/types/pokemon";
-import { reformatEvolutionChain } from "@/helpers/reformat";
-import { getPokemonDetail } from "@/services/pokemonService";
 import Link from "next/link";
 import Image from "next/image";
+import { pokemonEvolutionChainState } from "@/store/pokemonDetailStore";
+import { useRecoilValue } from "recoil";
 
-type Props = {};
-
-const Evolutions = (props: Props) => {
-  const BASE_URL = process.env.BASE_URL;
+const Evolutions = () => {
   const { query } = useRouter();
 
-  const [pokemonEvolutionChain, setPokemonEvolutionChain] =
-    useState<TPokemonListDetailResponse[]>();
-
-  const { data: pokemonDetail } = useFetchApi<TPokemonListDetailResponse>(
-    `${BASE_URL}/pokemon/${query.id}`
+  const pokemonEvolutionChain = useRecoilValue(
+    pokemonEvolutionChainState(query.id as string)
   );
-  const { data: dataSpecies } = useFetchApi<TPokemonSpeciesResponse>(
-    `${BASE_URL}/pokemon-species/${query.id}`
-  );
-
-  useEffect(() => {
-    if (pokemonDetail && dataSpecies) {
-      const fetchData = async () => {
-        const dataEvolution = await fetch(dataSpecies.evolution_chain.url).then(
-          (resp) => resp.json()
-        );
-
-        const reformatDataEvolution: { name: string; url: string }[] =
-          await reformatEvolutionChain(dataEvolution.chain);
-
-        const getPokemonsEvolveChain = Promise.all(
-          reformatDataEvolution.map(async (pokemon) => {
-            const response = await getPokemonDetail(pokemon.name);
-            return response;
-          })
-        );
-
-        const datas: TPokemonListDetailResponse[] =
-          await getPokemonsEvolveChain;
-
-        setPokemonEvolutionChain(datas);
-      };
-
-      fetchData();
-    }
-  }, [pokemonDetail, dataSpecies]);
-
-  if (!pokemonDetail || !pokemonEvolutionChain) return <>Loading...</>;
 
   return (
     <Card title="Evolutions">

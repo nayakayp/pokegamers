@@ -1,44 +1,13 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import Card from "../Card";
-import useFetchApi from "@/hooks/useFetchApi";
 import { useRouter } from "next/router";
-import {
-  TPokemonListDetailResponse,
-  TPokemonMovesResponse,
-} from "@/types/pokemon";
+import { pokemonMoveState } from "@/store/pokemonDetailStore";
 import { reformatPokemonMoveName } from "@/helpers/reformat";
+import { useRecoilValue } from "recoil";
 
-type Props = {};
-
-const Move = (props: Props) => {
-  const BASE_URL = process.env.BASE_URL;
-
-  const [pokemonMoves, setPokemonMoves] = useState<TPokemonMovesResponse[]>();
-
+const Move = () => {
   const { query } = useRouter();
-  const { data: pokemonDetail } = useFetchApi<TPokemonListDetailResponse>(
-    `${BASE_URL}/pokemon/${query.id}`
-  );
-
-  useEffect(() => {
-    if (pokemonDetail) {
-      const fetchDataMoves = async () => {
-        const datas = Promise.all(
-          pokemonDetail.moves.slice(0, 10).map(async (move) => {
-            const data = await fetch(move.move.url).then((resp) => resp.json());
-            return data;
-          })
-        );
-
-        const moves = await datas;
-        setPokemonMoves(moves);
-      };
-
-      fetchDataMoves();
-    }
-  }, [pokemonDetail]);
-
-  if (!pokemonDetail || !pokemonMoves) return <>Loading...</>;
+  const pokemonMoves = useRecoilValue(pokemonMoveState(query.id as string));
 
   return (
     <Card title="Move">
