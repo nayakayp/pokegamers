@@ -1,9 +1,9 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import Sprites from "../../../../../components/pages/detail/Sprites/Sprites";
+import Sprites from "@/components/pages/detail/Sprites/Sprites";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
-import { pokemonDataState } from "../../../../../store/pokemonDetailStore";
+import { pokemonDataState } from "@/store/pokemonDetailStore";
 
 jest.mock("next/router", () => ({
   useRouter: jest.fn(),
@@ -13,7 +13,7 @@ jest.mock("recoil", () => ({
   useRecoilValue: jest.fn(),
 }));
 
-jest.mock("../../../../store/pokemonDetailStore", () => ({
+jest.mock("@/store/pokemonDetailStore.ts", () => ({
   pokemonDataState: jest.fn(),
 }));
 

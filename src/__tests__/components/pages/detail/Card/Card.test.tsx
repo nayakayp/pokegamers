@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import Card from "../../../../../components/pages/detail/Card/Card";
+import Card from "@/components/pages/detail/Card/Card";
 
 describe("Card component", () => {
   it("renders the title correctly", () => {

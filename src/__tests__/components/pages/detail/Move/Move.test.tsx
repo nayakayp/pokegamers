@@ -1,9 +1,9 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import Move from "../../../../../components/pages/detail/Move/Move";
+import Move from "@/components/pages/detail/Move/Move";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
-import { pokemonMoveState } from "../../../../../store/pokemonDetailStore";
+import { pokemonMoveState } from "@/store/pokemonDetailStore";
 
 jest.mock("next/router", () => ({
   useRouter: jest.fn(),
@@ -13,7 +13,7 @@ jest.mock("recoil", () => ({
   useRecoilValue: jest.fn(),
 }));
 
-jest.mock("../../../../store/pokemonDetailStore", () => ({
+jest.mock("@/store/pokemonDetailStore.ts", () => ({
   pokemonMoveState: jest.fn(),
 }));
 

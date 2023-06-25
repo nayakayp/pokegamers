@@ -1,14 +1,14 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import SearchResult from "../../../../../components/pages/home/SearchResult/SearchResult";
+import SearchResult from "@/components/pages/home/SearchResult/SearchResult";
 import { useRecoilValue } from "recoil";
-import { pokemonDataState } from "../../../../../store/pokemonDetailStore";
+import { pokemonDataState } from "@/store/pokemonDetailStore";
 
 jest.mock("recoil", () => ({
   useRecoilValue: jest.fn(),
 }));
 
-jest.mock("../../../../store/pokemonDetailStore", () => ({
+jest.mock("@/store/pokemonDetailStore.ts", () => ({
   pokemonDataState: jest.fn(),
 }));
 

@@ -1,6 +1,6 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import PokemonCard from "../../../../../components/pages/home/PokemonCard/PokemonCard";
+import PokemonCard from "@/components/pages/home/PokemonCard/PokemonCard";
 
 describe("PokemonCard component", () => {
   const mockProps = {
