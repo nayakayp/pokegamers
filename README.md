@@ -1,8 +1,12 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## <p align="center"> https://pokegamers.vercel.app </p>
+
+<img width="1440" alt="image" src="https://github.com/nayakayp/pokegamers/assets/24706517/fa97a9f1-84df-4c8c-b360-50698f567fdb">
 
 ## Getting Started
 
-First, run the development server:
+1. Install all the packages `npm install`
+2. Make `.env` by using `.env.example` variable. Put `BASE_URL=https://pokeapi.co/api/v2`
+3. Run the development server:
 
 ```bash
 npm run dev
@@ -14,25 +18,40 @@ pnpm dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Performance Test
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+### Using developer tools
+1. 3G Slow
+   <details>
+    <summary>Homepage</summary>
+      <img width="1440" alt="3G Slow" src="https://github.com/nayakayp/pokegamers/assets/24706517/e19017ff-f11e-49af-84dd-6cf743d4b861">
+    </details>
+   <details>
+    <summary>Detail page</summary>
+     <img width="1437" alt="Detail 3G Slow" src="https://github.com/nayakayp/pokegamers/assets/24706517/d8a4878e-1628-422f-8dc3-51eca80315a9">
+    </details>
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+2. 3G Fast
+   <details>
+    <summary>Homepage</summary>
+      <img width="1440" alt="3G Fast" src="https://github.com/nayakayp/pokegamers/assets/24706517/78c6fd88-481a-4499-8a1c-1d13eb1dba99">
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+    </details>
+   <details>
+    <summary>Detail page</summary>
+     <img width="1439" alt="Detail 3G Fast" src="https://github.com/nayakayp/pokegamers/assets/24706517/5b7525c8-d020-47ea-a061-dec0db943ef5">
 
-## Learn More
+    </details>
 
-To learn more about Next.js, take a look at the following resources:
+### Using GTMetrix
+<details>
+<summary>Toggle</summary>
+  <img width="1439" alt="Detail 3G Fast" src="https://github.com/nayakayp/pokegamers/assets/24706517/3591a314-429c-4ae0-b04e-ec96f9fd8527">
+</details>
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Using Pagespeed Insight
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+<details>
+<summary>Toggle</summary>
+  <img width="1439" alt="Detail 3G Fast" src="https://github.com/nayakayp/pokegamers/assets/24706517/52c62e85-4594-4dfd-ac0e-520c885a3747">
+</details>
