@@ -1,7 +1,7 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import { RecoilRoot, useRecoilValue } from "recoil";
-import Pokemon from "./Pokemon";
+import Pokemon from "../../../../../components/pages/home/Pokemon/Pokemon";
 
 // Mock useRecoilValue hook
 jest.mock("recoil", () => ({

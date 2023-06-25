@@ -1,6 +1,6 @@
 import React from "react";
 import { render, fireEvent, waitFor } from "@testing-library/react";
-import Search from "./Search";
+import Search from "../../../../../components/pages/home/Search/Search";
 
 describe("Search component", () => {
   it("calls the onChange callback with the entered value", async () => {

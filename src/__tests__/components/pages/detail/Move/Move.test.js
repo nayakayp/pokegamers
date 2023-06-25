@@ -1,9 +1,9 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import Move from "./Move";
+import Move from "../../../../../components/pages/detail/Move/Move";
 import { useRouter } from "next/router";
 import { useRecoilValue } from "recoil";
-import { pokemonMoveState } from "../../../../store/pokemonDetailStore";
+import { pokemonMoveState } from "../../../../../store/pokemonDetailStore";
 
 jest.mock("next/router", () => ({
   useRouter: jest.fn(),

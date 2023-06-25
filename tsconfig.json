@@ -18,6 +18,6 @@
       "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/__tests__/example.js", "src/components/pages/detail/BaseStats/BaseStats.test.js", "src/components/pages/detail/Card/Card.test.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/__tests__/example.js", "src/components/pages/detail/BaseStats/BaseStats.test.tsx",   "src/__tests__/components/pages/detail/Evolutions/Evolutions.test.js", "src/__tests__/components/pages/detail/BaseStats/BaseStats.test.js"],
   "exclude": ["node_modules"]
 }

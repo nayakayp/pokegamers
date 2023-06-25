@@ -1,8 +1,8 @@
 import React from "react";
 import { render } from "@testing-library/react";
-import SearchResult from "./SearchResult";
+import SearchResult from "../../../../../components/pages/home/SearchResult/SearchResult";
 import { useRecoilValue } from "recoil";
-import { pokemonDataState } from "../../../../store/pokemonDetailStore";
+import { pokemonDataState } from "../../../../../store/pokemonDetailStore";
 
 jest.mock("recoil", () => ({
   useRecoilValue: jest.fn(),
