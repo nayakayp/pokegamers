@@ -12,11 +12,17 @@ type PokemonListResult = {
   url: string;
 };
 
-export default function Home() {
+type Props = {
+  pageData: TPokemonListResponse;
+};
+
+export default function Home({ pageData }: Props) {
   const { ref, inView } = useInView({ threshold: 1 });
   const [isFetchingNextPage, setIsFetchingNextPage] = useState<boolean>(false);
   const [currPage, setcurrPage] = useState<number>(1);
-  const [pokemonList, setPokemonList] = useState<PokemonListResult[]>();
+  const [pokemonList, setPokemonList] = useState<PokemonListResult[]>(
+    pageData.results
+  );
   const [searchQuery, setSearchQuery] = useState<string>("");
   const [isSearching, setIsSearching] = useState<boolean>(false);
 
@@ -43,17 +49,6 @@ export default function Home() {
     await setcurrPage(newCurrPage);
     await setIsFetchingNextPage(false);
   };
-
-  useEffect(() => {
-    const fetchPokemonList = async () => {
-      const data: TPokemonListResponse = await fetch(
-        `${process.env.BASE_URL}/pokemon/?offset=0&limit=8`
-      ).then((resp) => resp.json());
-      await setPokemonList(data.results);
-    };
-
-    fetchPokemonList();
-  }, []);
 
   useEffect(() => {
     if (inView) {
@@ -96,4 +91,12 @@ export default function Home() {
       )}
     </main>
   );
+}
+
+export async function getServerSideProps() {
+  const pageData: TPokemonListResponse = await fetch(
+    `${process.env.BASE_URL}/pokemon/?offset=0&limit=8`
+  ).then((res) => res.json());
+
+  return { props: { pageData } };
 }
