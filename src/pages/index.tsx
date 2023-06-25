@@ -22,7 +22,7 @@ export default function Home() {
 
   const handleSearchPokemon = async (value: string) => {
     if (value.trim() !== "") {
-      setSearchQuery(value);
+      setSearchQuery(value.toLowerCase());
       setIsSearching(true);
     } else if (value.trim() === "") {
       await setIsSearching(false);
