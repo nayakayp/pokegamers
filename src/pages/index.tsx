@@ -94,9 +94,9 @@ export default function Home({ pageData }: Props) {
 }
 
 export async function getServerSideProps() {
-  const resp = await fetch(`${process.env.BASE_URL}/pokemon/?offset=0&limit=8`);
-
-  const pageData = await resp.json();
+  const pageData: TPokemonListResponse = await fetch(
+    `${process.env.BASE_URL}/pokemon/?offset=0&limit=8`
+  ).then((res) => res.json());
 
   return { props: { pageData } };
 }
