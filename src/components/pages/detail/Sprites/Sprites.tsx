@@ -23,7 +23,7 @@ const Sprites = () => {
             src={pokemonDetail.sprites.front_default}
             width={96}
             height={96}
-            alt={pokemonDetail.name}
+            alt={pokemonDetail.name + pokemonDetail.sprites.front_default}
             className="mx-auto"
           />
           {pokemonDetail.sprites.back_default && (
@@ -31,7 +31,7 @@ const Sprites = () => {
               src={pokemonDetail.sprites.back_default}
               width={96}
               height={96}
-              alt={pokemonDetail.name}
+              alt={pokemonDetail.name + pokemonDetail.sprites.back_default}
               className="mx-auto"
             />
           )}
@@ -47,7 +47,7 @@ const Sprites = () => {
               src={pokemonDetail.sprites.front_shiny}
               width={96}
               height={96}
-              alt={pokemonDetail.name}
+              alt={pokemonDetail.name + pokemonDetail.sprites.front_shiny}
               className="mx-auto"
             />
           )}
@@ -57,7 +57,7 @@ const Sprites = () => {
               src={pokemonDetail.sprites.back_shiny}
               width={96}
               height={96}
-              alt={pokemonDetail.name}
+              alt={pokemonDetail.name + pokemonDetail.sprites.back_shiny}
               className="mx-auto"
             />
           )}

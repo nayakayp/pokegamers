@@ -29,8 +29,10 @@ const Move = () => {
             <tr key={move.id} className="border">
               <td>{idx + 1}</td>
               <td>{reformatPokemonMoveName(move.name)}</td>
-              <td>{move.power ? move.power : "-"}</td>
-              <td>{move.accuracy ? move.accuracy : "-"}</td>
+              <td data-testid="power">{move.power ? move.power : "-"}</td>
+              <td data-testid="accuracy">
+                {move.accuracy ? move.accuracy : "-"}
+              </td>
               <td className="capitalize">{move.type.name}</td>
             </tr>
           ))}
