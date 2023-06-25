@@ -15,9 +15,9 @@
     "jsx": "preserve",
     "incremental": true,
     "paths": {
-      "@/*": ["./src/*"]
+    "@/*": ["./src/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/__tests__/example.js", "src/components/pages/detail/BaseStats/BaseStats.test.tsx",   "src/__tests__/components/pages/detail/Evolutions/Evolutions.test.tsx", "src/__tests__/components/pages/detail/BaseStats/BaseStats.test.tsx"],
   "exclude": ["node_modules"]
 }
