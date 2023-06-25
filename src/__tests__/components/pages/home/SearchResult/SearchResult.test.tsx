@@ -22,8 +22,8 @@ describe("SearchResult component", () => {
   };
 
   beforeEach(() => {
-    useRecoilValue.mockReturnValue(mockPokemon);
-    pokemonDataState.mockReturnValue(mockPokemon);
+    (useRecoilValue as jest.Mock).mockReturnValue(mockPokemon);
+    (pokemonDataState as jest.Mock).mockReturnValue(mockPokemon);
   });
 
   afterEach(() => {
@@ -46,8 +46,8 @@ describe("SearchResult component", () => {
   });
 
   it("renders the 'Cannot found the pokemon' message when pokemon is null", () => {
-    useRecoilValue.mockReturnValueOnce(null);
-    pokemonDataState.mockReturnValueOnce(null);
+    (useRecoilValue as jest.Mock).mockReturnValueOnce(null);
+    (pokemonDataState as jest.Mock).mockReturnValueOnce(null);
 
     const { getByText } = render(<SearchResult query="unknown" />);
     const messageElement = getByText("Cannot found the pokemon");

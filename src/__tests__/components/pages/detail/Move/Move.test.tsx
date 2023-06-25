@@ -37,9 +37,9 @@ describe("Move component", () => {
   ];
 
   beforeEach(() => {
-    useRouter.mockReturnValue({ query: { id: "1" } });
-    useRecoilValue.mockReturnValue(mockMoves);
-    pokemonMoveState.mockReturnValue(mockMoves);
+    (useRouter as jest.Mock).mockReturnValue({ query: { id: "1" } });
+    (useRecoilValue as jest.Mock).mockReturnValue(mockMoves);
+    (pokemonMoveState as jest.Mock).mockReturnValue(mockMoves);
   });
 
   afterEach(() => {
@@ -101,8 +101,8 @@ describe("Move component", () => {
       },
     ];
 
-    useRecoilValue.mockReturnValue(mockNullMoves);
-    pokemonMoveState.mockReturnValue(mockNullMoves);
+    (useRecoilValue as jest.Mock).mockReturnValue(mockNullMoves);
+    (pokemonMoveState as jest.Mock).mockReturnValue(mockNullMoves);
 
     const { queryAllByTestId } = render(<Move />);
 
@@ -114,8 +114,8 @@ describe("Move component", () => {
   });
 
   it("displays 'Cannot found pokemon moves' when moves array is empty", () => {
-    useRecoilValue.mockReturnValue(null);
-    pokemonMoveState.mockReturnValue(null);
+    (useRecoilValue as jest.Mock).mockReturnValue(null);
+    (pokemonMoveState as jest.Mock).mockReturnValue(null);
 
     const { getByText } = render(<Move />);
 

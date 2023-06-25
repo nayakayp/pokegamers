@@ -29,9 +29,9 @@ describe("Sprites component", () => {
   };
 
   beforeEach(() => {
-    useRouter.mockReturnValue({ query: { id: "1" } });
-    useRecoilValue.mockReturnValue(mockPokemonDetail);
-    pokemonDataState.mockReturnValue(mockPokemonDetail);
+    (useRouter as jest.Mock).mockReturnValue({ query: { id: "1" } });
+    (useRecoilValue as jest.Mock).mockReturnValue(mockPokemonDetail);
+    (pokemonDataState as jest.Mock).mockReturnValue(mockPokemonDetail);
   });
 
   afterEach(() => {
@@ -62,8 +62,8 @@ describe("Sprites component", () => {
   });
 
   it("displays error message when pokemonDetail is not available", () => {
-    useRecoilValue.mockReturnValue(null);
-    pokemonDataState.mockReturnValue(null);
+    (useRecoilValue as jest.Mock).mockReturnValue(null);
+    (pokemonDataState as jest.Mock).mockReturnValue(null);
 
     const { getByText } = render(<Sprites />);
 

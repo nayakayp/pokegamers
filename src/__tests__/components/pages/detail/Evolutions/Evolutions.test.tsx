@@ -25,9 +25,11 @@ describe("Evolutions component", () => {
   ];
 
   beforeEach(() => {
-    useRouter.mockReturnValue({ query: { id: "1" } });
-    useRecoilValue.mockReturnValue(mockEvolutionChain);
-    pokemonEvolutionChainState.mockReturnValue(mockEvolutionChain);
+    (useRouter as jest.Mock).mockReturnValue({ query: { id: "1" } });
+    (useRecoilValue as jest.Mock).mockReturnValue(mockEvolutionChain);
+    (pokemonEvolutionChainState as jest.Mock).mockReturnValue(
+      mockEvolutionChain
+    );
   });
 
   afterEach(() => {

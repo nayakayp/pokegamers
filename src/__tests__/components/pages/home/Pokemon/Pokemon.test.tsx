@@ -13,11 +13,11 @@ describe("Pokemon component", () => {
   const useRecoilValueMock = useRecoilValue;
 
   beforeEach(() => {
-    useRecoilValueMock.mockReset();
+    (useRecoilValueMock as jest.Mock).mockReset();
   });
 
   it("renders 'Cannot found the pokemon' message when pokemon is null", () => {
-    useRecoilValueMock.mockReturnValue(null);
+    (useRecoilValueMock as jest.Mock).mockReturnValue(null);
 
     const { getByText } = render(
       <RecoilRoot>
@@ -38,7 +38,7 @@ describe("Pokemon component", () => {
       },
     };
 
-    useRecoilValueMock.mockReturnValue(mockPokemon);
+    (useRecoilValueMock as jest.Mock).mockReturnValue(mockPokemon);
 
     const { getByText, getByAltText } = render(
       <RecoilRoot>

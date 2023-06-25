@@ -30,9 +30,9 @@ describe("BaseStats component", () => {
   };
 
   beforeEach(() => {
-    useRouter.mockReturnValue({ query: { id: "1" } });
-    useRecoilValue.mockReturnValue(mockPokemon);
-    pokemonDataState.mockReturnValue(mockPokemon);
+    (useRouter as jest.Mock).mockReturnValue({ query: { id: "1" } });
+    (useRecoilValue as jest.Mock).mockReturnValue(mockPokemon);
+    (pokemonDataState as jest.Mock).mockReturnValue(mockPokemon);
   });
 
   afterEach(() => {
@@ -59,8 +59,8 @@ describe("BaseStats component", () => {
   });
 
   it("renders the 'Cannot found base stats' message when pokemonDetail is null", () => {
-    useRecoilValue.mockReturnValueOnce(null);
-    pokemonDataState.mockReturnValueOnce(null);
+    (useRecoilValue as jest.Mock).mockReturnValueOnce(null);
+    (pokemonDataState as jest.Mock).mockReturnValueOnce(null);
 
     const { getByText } = render(<BaseStats />);
     const messageElement = getByText("Cannot found base stats");
