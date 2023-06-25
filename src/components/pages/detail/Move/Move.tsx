@@ -14,7 +14,7 @@ const Move = () => {
 
   return (
     <Card title="Move">
-      <table className="table-auto w-full border-separate border-spacing-2 border border-slate-400">
+      <table className="table-auto w-full border-separate md:border-spacing-2 border border-slate-400">
         <thead>
           <tr>
             <th className="text-left">No</th>

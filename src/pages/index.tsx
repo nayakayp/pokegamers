@@ -68,7 +68,7 @@ export default function Home() {
       <div className="mt-4">
         <Search onChange={(newValue) => handleSearchPokemon(newValue)} />
       </div>
-      <div className="pt-10 pb-4 grid grid-cols-2 gap-4 justify-center">
+      <div className="pt-10 pb-4 grid md:grid-cols-2 gap-4 justify-center">
         {isSearching ? (
           <Suspense fallback={<PokemonCardSkeleton />}>
             <SearchResult query={searchQuery} />
@@ -88,7 +88,7 @@ export default function Home() {
       {!isFetchingNextPage ? (
         <div ref={ref} className="bg-transparent h-10 w-full"></div>
       ) : (
-        <div className="grid grid-cols-2 gap-4 justify-center">
+        <div className="grid md:grid-cols-2 gap-4 justify-center">
           {[...Array(8)].map((_, i) => (
             <PokemonCardSkeleton key={i} />
           ))}

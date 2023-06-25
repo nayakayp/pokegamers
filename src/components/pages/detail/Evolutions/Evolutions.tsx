@@ -15,9 +15,12 @@ const Evolutions = () => {
 
   return (
     <Card title="Evolutions">
-      <div className="flex items-center gap-4 justify-center p-2">
+      <div className="flex flex-col md:flex-row items-center gap-4 justify-center p-2">
         {pokemonEvolutionChain.map((pokemon, index) => (
-          <div key={index} className="flex items-center gap-4">
+          <div
+            key={index}
+            className="flex flex-col md:flex-row items-center gap-4"
+          >
             {index > 0 && (
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -25,7 +28,7 @@ const Evolutions = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="w-6 h-6"
+                className="w-6 h-6 rotate-90 md:rotate-0"
               >
                 <path
                   strokeLinecap="round"

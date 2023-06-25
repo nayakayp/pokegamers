@@ -64,8 +64,8 @@ const PokemonDetailPage = () => {
           ))}
         </div>
       </div>
-      <div className="grid gap-10">
-        <div className="grid mt-10 grid-cols-2 gap-10">
+      <div className="grid gap-10 grid-cols-1">
+        <div className="grid mt-10 md:grid-cols-2 gap-10">
           <Suspense fallback={<CardSkeleton />}>
             <BaseStats />
           </Suspense>
